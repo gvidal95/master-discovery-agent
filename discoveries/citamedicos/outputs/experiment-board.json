@@ -1,0 +1,48 @@
+{
+  "hypotheses": [
+    {
+      "id": "H-01",
+      "risk": "alto",
+      "assumption": "El personal de la clínica (recepcionistas, médicos y facturación) adoptará el sistema y dejará de usar hojas de cálculo y herramientas fragmentadas en su flujo de trabajo diario.",
+      "hypothesis": "Creemos que el personal de la clínica registrará el 80 % de las citas en el sistema unificado si se les ofrece un calendario compartido que bloquea conflictos automáticamente, porque la principal fricción actual es detectar manualmente la disponibilidad de médicos y consultorios.",
+      "metric": "Porcentaje de citas agendadas a través del nuevo sistema frente al total de citas registradas en la semana.",
+      "threshold": "≥ 80 % de las citas registradas en el sistema durante la segunda semana del piloto (14 días de observación).",
+      "experiment": "Concierge / piloto operativo: habilitar el calendario compartido con 1 recepcionista y 2 médicos durante 2 semanas; observar resistencia, frecuencia de recaída a hojas de cálculo y conteo diario de citas registradas por canal.",
+      "time_box": "2 semanas; sin costo de infraestructura adicional (usar Google Calendar como simulacro de calendario unificado con protocolo manual de bloqueo).",
+      "decision": "Si pasa → construir el módulo de agenda con bloqueo automático real y planificar onboarding para toda la clínica. Si falla → entrevistar al personal para identificar la fricción específica (velocidad, formación insuficiente, flujo más lento que el actual) y rediseñar el flujo antes de construir."
+    },
+    {
+      "id": "H-02",
+      "risk": "alto",
+      "assumption": "Los médicos especialistas registrarán sus notas de evolución de consulta en el sistema digital en lugar de hacerlo en papel o apuntes propios.",
+      "hypothesis": "Creemos que los médicos especialistas registrarán las notas de evolución en el sistema si el formulario de evolución tiene 4 campos clave y se completa en menos de 2 minutos, porque su principal objeción al registro digital es el tiempo adicional que consume durante la consulta.",
+      "metric": "Porcentaje de consultas realizadas que tienen nota de evolución registrada en el sistema al cierre del día.",
+      "threshold": "≥ 70 % de las consultas del piloto con nota de evolución registrada en el sistema al finalizar la segunda semana (14 días de observación con 3 médicos).",
+      "experiment": "Prototipo desechable: formulario de 4 campos (motivo de consulta, diagnóstico, tratamiento indicado, próxima cita) construido en Google Forms; observación directa con 3 médicos durante 2 semanas; medir tiempo de llenado y tasa de completitud diaria.",
+      "time_box": "2 semanas; diseño del formulario en 3 días sin costo de desarrollo.",
+      "decision": "Si pasa → incluir los 4 campos validados como núcleo de la ficha de evolución en el MVP. Si falla → entrevistar a los médicos para diagnosticar la fricción real (campo incorrecto, velocidad insuficiente, privacidad) y simplificar o rediseñar el formulario antes de incluirlo en el MVP."
+    },
+    {
+      "id": "H-03",
+      "risk": "medio",
+      "assumption": "Los datos históricos de pacientes (antecedentes, alergias, medicamentos actuales) pueden migrarse o ingresarse al nuevo sistema sin un esfuerzo tan alto que haga inviable el proyecto.",
+      "hypothesis": "Creemos que la clínica podrá ingresar los datos de sus pacientes activos con un tiempo ≤ 5 minutos por expediente si se provee una plantilla de importación estructurada, porque la mayor parte de los datos ya están digitalizados en las hojas de cálculo actuales.",
+      "metric": "Tiempo promedio de ingreso por expediente de paciente y porcentaje de expedientes con datos mínimos completos (antecedentes + alergias + medicamentos actuales) al finalizar la sesión.",
+      "threshold": "Tiempo promedio de ingreso ≤ 5 minutos por expediente Y ≥ 90 % de los 20 expedientes del piloto con datos mínimos completos en una sesión de 4 horas.",
+      "experiment": "Piloto de migración manual: seleccionar 20 expedientes reales de pacientes activos (con consentimiento), proveer una plantilla CSV y pedir a la recepcionista que los ingrese sin asistencia técnica adicional; medir tiempo y tasa de completitud.",
+      "time_box": "1 día de sesión de ingreso; diseño de plantilla en 2 horas; sin costo de herramientas adicionales.",
+      "decision": "Si pasa → planificar la migración completa como parte del onboarding del MVP con la misma plantilla. Si falla → rediseñar la plantilla de importación o evaluar si se necesita una herramienta de migración dedicada antes del lanzamiento."
+    },
+    {
+      "id": "H-04",
+      "risk": "bajo",
+      "assumption": "La red de la clínica soporta el acceso simultáneo de recepcionistas, médicos y facturación a un sistema web en tiempo real sin degradación durante el horario de atención.",
+      "hypothesis": "Creemos que la red de la clínica soportará el sistema sin interrupciones si al menos 10 usuarios simultáneos acceden a la aplicación web con latencia < 500 ms, porque la clínica ya usa otras aplicaciones web durante el horario de atención sin reportar problemas de conectividad.",
+      "metric": "Porcentaje de disponibilidad del sistema y latencia promedio de respuesta medidos durante el horario de atención (8 horas diarias).",
+      "threshold": "Disponibilidad ≥ 99 % y latencia promedio < 500 ms durante 5 días consecutivos de prueba en la red de la clínica con 10 usuarios concurrentes simulados.",
+      "experiment": "Test de carga técnico: desplegar una versión mínima del sistema en un servidor de prueba y simular 10 usuarios concurrentes con Apache JMeter durante 5 días laborables en la red local de la clínica.",
+      "time_box": "5 días; costo de servidor de prueba ≤ 20 USD.",
+      "decision": "Si pasa → proceder con el despliegue en la infraestructura actual de red sin cambios. Si falla → evaluar mejora de ancho de banda o cambio a arquitectura más liviana (caché agresivo, modo offline parcial) antes de desplegar en producción."
+    }
+  ]
+}

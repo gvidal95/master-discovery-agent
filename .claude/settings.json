@@ -1,0 +1,21 @@
+{
+    "hooks": {
+        "PreToolUse" : [
+            {
+                "matcher": "Write|Edit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "phyton3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/readiness-gate.py\""
+
+                    },
+                    {
+                        "type": "command",
+                        "command": "phyton3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/hypothesis-gate.py\""
+
+                    }
+                ]
+            }
+        ]
+    }
+}
